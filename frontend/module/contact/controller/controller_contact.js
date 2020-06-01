@@ -53,7 +53,10 @@ getyourcar.controller('controller_contact', function($scope, services, toastr) {
         .then(function(response) {
             if (response == 'true') {
                 toastr.success('The email has been sended, you will receive an answer as soon as posible.' ,'Email sended');
-                $scope.full_name = "";
+                $scope.full_name = null;
+                $scope.user_email = null;
+                $scope.email_matter = null;
+                $scope.email_message = null;
             }else {
                 toastr.error('Something happend when trying to send.' ,'Error');
             }// end_else

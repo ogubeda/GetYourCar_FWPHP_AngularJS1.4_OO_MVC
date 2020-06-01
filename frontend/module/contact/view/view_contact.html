@@ -27,7 +27,7 @@
 				<div>
 					<textarea required ng-model = "email_message" ng-pattern = "regMessage" class = "area" rows="4" cols="50" name="email_message" id = "email_message" autocomplete="off" placeholder="Message" style = "margin-top:15px"></textarea>
 				</div>
-				<input ng-show = "sendEmail_form.full_name.$valid && sendEmail_form.user_email.$valid && sendEmail_form.email_matter.$valid  && sendEmail_form.email_message.$valid" 
+				<input ng-disabled = "sendEmail_form.full_name.$invalid && sendEmail_form.user_email.$invalid && sendEmail_form.email_matter.$invalid  && sendEmail_form.email_message.$invalid" 
 						ng-click = "sendEmail()" type = "submit" id = "send-email" class = "default-button" value = "Send"/>
 			</form>
 		</div>

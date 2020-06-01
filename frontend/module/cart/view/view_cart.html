@@ -1,0 +1,27 @@
+<div class = "container separe-menu">
+    <div id = "container-details-cart">
+        <h1>Products</h1>
+        <div id = "container-disc-code" style = "float: right;">
+            <p>Discount Code</p>
+            <input type = "text" style = "display: block" id = "code-disc-input"/>
+            <a class = "default-button" id = "code-disc-btn">Apply</a>
+        </div>
+        <div ng-repeat = "data in dataCart" id = "{{data.carPlate}}" class = "product-element" style = "margin-top: 25px; width: 75%">
+            <span id = "info-cont">{{data.brand}} {{data.model}}</span>
+            <span id = "select-days{{data.carPlate}}">
+                Days
+                <select class = "select-drop-days" name = "quantityDays{{data.carPlate}}" autocomplete="off" id = "quantityDays{{data.carPlate}}">
+
+                </select>
+            </span>
+            <a style = "margin-left: 15px" id = "delete-btn">Delete</a>
+            <span id = "info-price">{{data.price}}€</span>
+        </div>
+    </div>
+    <div id = "container-price-cart">
+        <div id = "header-price-cart">
+            <h3>Total Price</h3>
+        </div>
+        <div id = "price-cart-calc"></div>
+    </div>
+</div>

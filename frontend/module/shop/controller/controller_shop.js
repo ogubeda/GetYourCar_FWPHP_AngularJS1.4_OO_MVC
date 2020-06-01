@@ -1,4 +1,4 @@
-getyourcar.controller('controller_shop', function($scope, filters, cars) {
+getyourcar.controller('controller_shop', function($scope, services,filters, cars) {
     let filteredCars = [];
     let currentCars = [];
 
@@ -8,6 +8,10 @@ getyourcar.controller('controller_shop', function($scope, filters, cars) {
     $scope.currentPage = 1;
     $scope.cars = cars.slice((($scope.currentPage - 1) * $scope.itemsPerPage), (($scope.currentPage) * $scope.itemsPerPage));
     $scope.enabledFilters = false;
+
+    $scope.showDetails = function(carPlate) {
+        location.href = "#/shop/" + carPlate;
+    };// end_showDetails
 
     $scope.pageChanged = function() {
         $scope.cars = cars.slice((($scope.currentPage - 1) * $scope.itemsPerPage), ($scope.currentPage * $scope.itemsPerPage));
@@ -63,4 +67,22 @@ getyourcar.controller('controller_shop', function($scope, filters, cars) {
             currentCars = currentCarsVal;
         }// end_if
     }// end_setPage
+
+    $scope.detectFav = function(carPlate) {
+        services.post('shop', 'updateFavs', {JWT: localStorage.token, carPlate: carPlate})
+        .then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.log(error);
+        });
+    };// end_detectFav
+
+    $scope.addToCart = function(carPlate) {
+        services.put('cart', 'storeCart', {carPlate: carPlate, days: 1, JWT: localStorage.token})
+        .then(function(response) {
+            console.log(response);
+        }, function(error) {
+            console.log(error);
+        });
+    };// end_addToCart
 });

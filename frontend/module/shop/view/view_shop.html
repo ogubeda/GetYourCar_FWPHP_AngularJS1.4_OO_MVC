@@ -37,11 +37,11 @@
 	</div>
 	<div class="container-shop row" style="margin-top: 5px;">
 		<div ng-repeat="data in cars" class="card-shop show-details-btn">
-			<a class="inner" href = "#/shop/{{data.carPlate}}">
+			<div class="inner" ng-click = "showDetails('{{data.carPlate}}')">
 				<h4 style="padding-top: 25px; margin-bottom: 70px">{{data.brand}} {{data.model}}</h4>
 				<h5>{{data.price}}€</h5>
 				<div id="container-btns">
-					<div id="fav-btn" class="normal-fav-btn" style="flex: 25px 0 50%; margin-right: 100px">
+					<div id="fav-btn" ng-click = "detectFav('{{data.carPlate}}');$event.stopPropagation();"class="normal-fav-btn" style="flex: 25px 0 50%; margin-right: 100px">
 						<svg viewBox="-5 -28 522.00002 512" xmlns="http://www.w3.org/2000/svg">
 							<path d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687
 							0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438
@@ -55,7 +55,7 @@
 							0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0"/>
 						</svg>
 					</div>
-					<div id="cart-btn" class="normal-cart-btn" style="flex: 25px 0 50%">
+					<div id="cart-btn" ng-click = "addToCart('{{data.carPlate}}');$event.stopPropagation();" class="normal-cart-btn" style="flex: 25px 0 50%">
 						<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cart-plus"
 							class="svg-inline--fa fa-cart-plus fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 576 512">
@@ -65,7 +65,7 @@
 						</svg>
 					</div>
 				</div>
-			</a>
+			</div>
 		</div>
 	</div>
 </div>

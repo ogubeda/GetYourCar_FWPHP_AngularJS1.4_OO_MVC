@@ -85,6 +85,14 @@ getyourcar.config(['$routeProvider', '$locationProvider',
                             return services.get('login', 'print_user',localstorageService.getUsers());
                         }
                     }
+                }).when("/cart", {
+                    templateUrl: "frontend/module/cart/view/view_cart.html",
+                    controller: "controller_cart",
+                    resolve: {
+                        dataCart: function(services) {
+                            return services.post('cart', 'loadDataCart', {JWT: localStorage.token});
+                        }
+                    }
                 }).otherwise("/home", {
                     templateUrl: "frontend/module/home/view/view_home.html", 
                     controller: "controller_home"

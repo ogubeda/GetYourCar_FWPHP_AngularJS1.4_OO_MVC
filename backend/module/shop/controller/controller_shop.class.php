@@ -28,8 +28,8 @@ class controller_shop {
     }// end_sendFavs
 
     function updateFavs() {
-        if (!empty($_POST['jwt'])) {
-            echo common::accessModel('shop_model', 'setUserFav_shop', [$_POST['jwt'], $_SESSION['JWT_Secret'], $_POST['carPlate']]);
+        if (!empty($_POST['JWT'])) {
+            echo common::accessModel('shop_model', 'setUserFav_shop', [$_POST['JWT'], $_SESSION['JWT_Secret'], $_POST['carPlate']]);
             return;
         }// end_if
         echo 'no-login';
