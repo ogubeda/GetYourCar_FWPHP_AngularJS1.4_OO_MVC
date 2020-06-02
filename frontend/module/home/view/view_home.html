@@ -13,7 +13,7 @@
         <h1>Our most visited brands</h1>
         <div id = "containerCategories" class = "row">
             <div ng-repeat = "data in viewedBrands" id = "{{data.brand}}" class = "col-md-4 single-service-2">
-                <div class = "inner">
+                <div class = "inner" ng-click = "redirectShopBrand('{{data.brand}}')">
                     <img src = "http://192.168.0.182/frameworkCars.v.1.3/frontend/{{data.image}}" style = "max-width: 100%; height: 100px;">
                         <h4 style = "padding-top: 25px">{{data.brand}}</h4>
                     </img>

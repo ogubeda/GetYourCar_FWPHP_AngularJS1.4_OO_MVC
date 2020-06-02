@@ -1,7 +1,8 @@
 <div class = "container separe-menu">
     <div id = "container-details-cart">
         <h1>Products</h1>
-        <div id = "container-disc-code" style = "float: right;">
+        <h3 ng-show = "!showCart">It seems your cart is empty :(</h3>
+        <div ng-show = "showCart" id = "container-disc-code" style = "float: right;">
             <p>Discount Code</p>
             <input type = "text" style = "display: block" id = "code-disc-input"/>
             <a class = "default-button" id = "code-disc-btn">Apply</a>
@@ -10,18 +11,19 @@
             <span id = "info-cont">{{data.brand}} {{data.model}}</span>
             <span id = "select-days{{data.carPlate}}">
                 Days
-                <select class = "select-drop-days" name = "quantityDays{{data.carPlate}}" autocomplete="off" id = "quantityDays{{data.carPlate}}">
-
+                <select ng-model = "qtyDays[data.carPlate]" ng-change = "changeDays('{{data.carPlate}}')" ng-options = "item for item in maxDays(10)"
+                    class = "select-drop-days" name = "quantityDays{{data.carPlate}}" autocomplete="off" id = "quantityDays{{data.carPlate}}" style = "width: 60%">
                 </select>
             </span>
-            <a style = "margin-left: 15px" id = "delete-btn">Delete</a>
+            <a ng-click = "deleteFromCart('{{data.carPlate}}')" style = "margin-left: 15px" id = "delete-btn">Delete</a>
             <span id = "info-price">{{data.price}}€</span>
         </div>
     </div>
-    <div id = "container-price-cart">
+    <div id = "container-price-cart" ng-show = "showCart">
         <div id = "header-price-cart">
             <h3>Total Price</h3>
         </div>
         <div id = "price-cart-calc"></div>
+        <a ng-click = "checkOut()" ng-show = "showCart" id = "checkout-btn" class = "default-button">Check Out</a>
     </div>
 </div>

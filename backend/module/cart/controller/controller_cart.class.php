@@ -22,7 +22,7 @@ class controller_cart {
         if ((!empty($_POST['JWT'])) && (isset($_SESSION['JWT_Secret']))) {
             echo common::accessModel('cart_model', 'removeUser_cart', [$_POST['carPlate'], $_POST['JWT'], $_SESSION['JWT_Secret']]);
         }else {
-            echo json_encode(false);
+            echo 'no-login';
         }// end_else
     }// end_removeCart
 
@@ -46,7 +46,7 @@ class controller_cart {
         if ((!empty($_POST['JWT'])) && (isset($_SESSION['JWT_Secret']))) {
             echo common::accessModel('cart_model', 'checkOut_cart', [$_POST['JWT'], $_SESSION['JWT_Secret']]);
         }else {
-            echo json_encode('false');
+            echo 'no-login';
         }// end_else
     }// end_checkOut
 

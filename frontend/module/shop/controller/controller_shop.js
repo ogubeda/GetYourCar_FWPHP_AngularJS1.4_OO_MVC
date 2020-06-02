@@ -1,4 +1,4 @@
-getyourcar.controller('controller_shop', function($scope, services,filters, cars) {
+getyourcar.controller('controller_shop', function($scope, services, filters, cars) {
     let filteredCars = [];
     let currentCars = [];
 
@@ -6,7 +6,6 @@ getyourcar.controller('controller_shop', function($scope, services,filters, cars
     $scope.itemsPerPage = 12;
     $scope.totalItems = cars.length;
     $scope.currentPage = 1;
-    $scope.cars = cars.slice((($scope.currentPage - 1) * $scope.itemsPerPage), (($scope.currentPage) * $scope.itemsPerPage));
     $scope.enabledFilters = false;
 
     $scope.showDetails = function(carPlate) {
@@ -30,6 +29,13 @@ getyourcar.controller('controller_shop', function($scope, services,filters, cars
         setPage(filteredCars, 1);
         $scope.enabledFilters = true;
     };// end_filterCars
+
+    if (localStorage.brandShop) {
+        $scope.filterCars(localStorage.brandShop, 'brand');
+        localStorage.removeItem('brandShop');
+    }else {
+        $scope.cars = cars.slice((($scope.currentPage - 1) * $scope.itemsPerPage), (($scope.currentPage) * $scope.itemsPerPage));
+    }// end_else
 
     $scope.removeFilter = function(value, key) {
         let newFilters = [];

@@ -1,12 +1,13 @@
 getyourcar.controller('controller_home', function($scope, $window, featuredCars, viewedBrands) {
     let brands = 3;
     let total = viewedBrands.length;
+
     $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
     $scope.active = 0;
     $scope.slides = featuredCars;
     $scope.viewedBrands = viewedBrands.slice(0, brands);
-    //////
+
     angular.element($window).on('mousewheel', function() {
         let footerHeight = document.getElementById('container-footer').offsetHeight;
         let position = $window.scrollY + footerHeight;
@@ -22,6 +23,11 @@ getyourcar.controller('controller_home', function($scope, $window, featuredCars,
             }// end_else
         }// end_if
     });
+
+    $scope.redirectShopBrand = function(brand) {
+        localStorage.brandShop = brand;
+        location.href = "#/shop";
+    };// end_redirectShopBrand
 });// end_controller
 
 getyourcar.controller('controller_menu', function($scope, services_logIn) {
