@@ -7,6 +7,7 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
     $scope.totalItems = cars.length;
     $scope.currentPage = 1;
     $scope.enabledFilters = false;
+    $scope.currentFilters = {};
 
     $scope.showDetails = function(carPlate) {
         location.href = "#/shop/" + carPlate;
@@ -17,6 +18,8 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
     };// end_PageChanged
 
     $scope.filterCars = function(value, key) {
+        $scope.currentFilters[value + '-' + key] = true;
+
         for (row in cars) {
             if (cars[row][key] == value) {
                 if (!currentCars.includes(cars[row].carPlate)) {
@@ -41,6 +44,8 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
         let newFilters = [];
         let newCurrentCars = [];
         
+        $scope.currentFilters[value + '-' + key] = false;
+
         for (row in filteredCars) {
             if (filteredCars[row][key] != value) {
                 newFilters.push(filteredCars[row]);
@@ -68,7 +73,6 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
         if (filteredCarsVal != undefined) {
             filteredCars = filteredCarsVal;
         }// end_if 
-
         if (currentCarsVal != undefined) {
             currentCars = currentCarsVal;
         }// end_if
@@ -77,7 +81,11 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
     $scope.detectFav = function(carPlate) {
         services.post('shop', 'updateFavs', {JWT: localStorage.token, carPlate: carPlate})
         .then(function(response) {
-            console.log(response);
+            if (response === "no-login") {
+                localStorage.jumpPage = "shop";
+                location.href = "#/login";
+            }// end_if
+
         }, function(error) {
             console.log(error);
         });
@@ -87,6 +95,7 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
         services.put('cart', 'storeCart', {carPlate: carPlate, days: 1, JWT: localStorage.token})
         .then(function(response) {
             console.log(response);
+            
         }, function(error) {
             console.log(error);
         });
