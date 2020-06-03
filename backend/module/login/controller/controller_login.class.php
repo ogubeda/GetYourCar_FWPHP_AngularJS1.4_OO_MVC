@@ -5,10 +5,6 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '/frameworkCars.v.1.3/backend/';
 include ($path . 'module/login/model/activity/processingSession.php');
 //////
 class controller_login {
-    function list() {
-        common::loadView('topPageLogIn.php', VIEW_PATH_LOGIN . 'logIn.html');
-    }// end_list
-
     function register() {
         $result = common::accessModel('login_model', 'registerUserClient_login', [$_POST['username'], $_POST['email'], $_POST['password']]);
         $email = [];

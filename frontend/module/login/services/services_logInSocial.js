@@ -1,4 +1,4 @@
-getyourcar.factory('services_logInSocial', ['services', 'services_localStorage', 'services_logIn', 'FireBaseConst',function(services, services_localStorage, services_logIn, FireBaseConst) {
+getyourcar.factory('services_logInSocial', ['services', 'services_localStorage', 'services_logIn', 'FireBaseConst',function(services, toastr, services_logIn, FireBaseConst) {
     let service = {initialize: initialize, socialLogIn: socialLogIn};
     return service;
 
@@ -19,9 +19,8 @@ getyourcar.factory('services_logInSocial', ['services', 'services_localStorage',
     function socialLogIn(profile) {
         services.post('login', 'socialLogIn', {profile: profile})
         .then(function(response) {
-            services_localStorage.setSession(response.secureSession, response.jwt);
-            services_logIn.printMenu();
-            location.href = "#/home";
+            services_logIn.redirectLogIn(response.secureSession, response.jwt);
+            toastr.success('Log In succesfully.');
         }, function(error) {
             console.log(error);
         });

@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <functions>
     <function>
-        <name>list</name>
-        <uri>list</uri>
-        <uri>recover</uri>
-        <uri>verify</uri>
-    </function>
-    <function>
         <name>register</name>
         <uri>register</uri>
     </function>

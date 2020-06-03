@@ -1,5 +1,5 @@
 getyourcar.factory('services_logIn', ['$rootScope', 'services', 'services_localStorage', function($rootScope, services, services_localStorage) {
-    let service = {printMenu: printMenu, logOut: logOut};
+    let service = {printMenu: printMenu, logOut: logOut, redirectLogIn: redirectLogIn};
     return service;
 
     function printMenu() {
@@ -28,6 +28,14 @@ getyourcar.factory('services_logIn', ['$rootScope', 'services', 'services_localS
         $rootScope.showLogIn = true;
         $rootScope.showProfile = false;
     }// end_logIn
+
+    function redirectLogIn(secureSession, JWTToken) {
+        let jumpPage = (localStorage.jumpPage) ? services_localStorage.setJumpPage() : 'home';
+
+        services_localStorage.setSession(secureSession, JWTToken);
+        printMenu();
+        location.href = "#/" + jumpPage;
+    }// end_redirectLogIn
 
     function logOut() {
         services.get('login', 'logOut')
