@@ -3,8 +3,6 @@ getyourcar.controller('controller_cart', function($scope, services, toastr, data
     $scope.showCart = false;
     $scope.qtyDays = {};
 
-    console.log(dataCart);
-
     if (Array.isArray(dataCart)) {
         $scope.dataCart = dataCart;
         $scope.showCart = true;
@@ -14,7 +12,7 @@ getyourcar.controller('controller_cart', function($scope, services, toastr, data
         let daysArr = [];
 
         for (let i = 0; i < num; i++) {
-            daysArr.push(i + 1);
+            daysArr.push((i + 1).toString());
         }// end_for
 
         return daysArr;
@@ -24,32 +22,40 @@ getyourcar.controller('controller_cart', function($scope, services, toastr, data
         services.put('cart', 'updateDays', {days: $scope.qtyDays[carPlate], JWT: localStorage.token, carPlate: carPlate})
         .then(function(response) {
             console.log(response);
+            updateCart();
 
         }, function(error) {
             console.log(error);
         });
-    };
+    };// end_changeDays
 
     $scope.deleteFromCart = function(carPlate) {
-        services.put('cart', 'removeCart', {carPlate: carPlate, JWT: localStorage.token})
-        .then(function(response) {
-            if (response === 'true') {
-                updateCart();
-            }// end_if
+        // $scope.qtyDays[carPlate]
+        console.log($scope.qtyDays[carPlate]);
+        // services.put('cart', 'removeCart', {carPlate: carPlate, JWT: localStorage.token})
+        // .then(function(response) {
+        //     if (response === 'true') {
+        //         updateCart();
+        //     }// end_if
 
-        }, function(error) {
-            console.log(error);
-        });
+        // }, function(error) {
+        //     console.log(error);
+        // });
     };// end_deleteFromCart
 
     $scope.checkOut = function() {
         services.put('cart', 'checkOut', {JWT: localStorage.token})
         .then(function(response) {
-            console.log(response);
+            if (response != "false") {
+                forceEmptyCart();
+                toastr.success('Thanks for trust in our cars :)' ,'Purchase succesfully.');
+            }else {
+                toastr.error("It seems you don't have enough money." ,'Error');
+            }// end_else
 
         }, function(error) {
             console.log(error);
-        });
+        });// end_services
     }; // end_checkOut
 
     function updateCart() {
@@ -58,12 +64,16 @@ getyourcar.controller('controller_cart', function($scope, services, toastr, data
             if (Array.isArray(response)) {
                 $scope.dataCart = response;
             }else {
-                $scope.dataCart = "";
-                $scope.showCart = false;
+                forceEmptyCart();
             }// end_else
 
         }, function(error) {
             console.log(error);
-        });
+        });// end_services
     }// end_updateCart
+
+    function forceEmptyCart() {
+        $scope.dataCart = "";
+        $scope.showCart = false;
+    }// end_forceEmptyCart
 });

@@ -2,10 +2,6 @@
 //////
 session_start();
 class controller_cart {
-    function list() {
-        common::loadView('topPageCheckOut.php', VIEW_PATH_CART . 'list.html');
-    }// end_list
-
     function storeCart() {
         if (!empty($_POST['carPlate']) && !empty($_POST['JWT'])) {
             echo common::accessModel('cart_model', 'storeCartUser_cart', [$_POST['carPlate'], $_POST['JWT'], $_SESSION['JWT_Secret'], $_POST['days']]);

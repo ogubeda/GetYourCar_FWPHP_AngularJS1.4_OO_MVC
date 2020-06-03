@@ -53,7 +53,6 @@ class cart_bll {
     public function checkOut_cart_BLL($args) {
         $total = 0;
         $price = 0;
-        $transaction = false;
         $username = json_decode(jwt_process::decode($args[0], $args[1]), true)['name'];
         $idPurchase = "$username" . date("Ymdhis");
         $valueCart = $this -> dao -> selectValueCart($username);
@@ -69,8 +68,9 @@ class cart_bll {
         }// end_if
         if ($total <= $this -> dao -> selectUserMoney($username)['money']) {
             $transaction = $this -> dao -> purchaseTransaction($username, $total, $idPurchase);
+            return $transaction;
         }// end_if
         
-        return $transaction;
+        return 'false';
     }// end_checkOut_cart_BLL
 }// end_cart_bll
