@@ -6,7 +6,6 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
     $scope.itemsPerPage = 12;
     $scope.totalItems = cars.length;
     $scope.currentPage = 1;
-    $scope.enabledFilters = false;
     $scope.currentFilters = {};
 
     $scope.showDetails = function(carPlate) {
@@ -30,7 +29,6 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
         }// end_for
         
         setPage(filteredCars, 1);
-        $scope.enabledFilters = true;
     };// end_filterCars
 
     if (localStorage.brandShop) {
@@ -62,7 +60,6 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
 
     $scope.clearAllFilters = function() {
         setPage(cars, 1, [], [])
-        $scope.enabledFilters = false;
     };// end_clearAllFilters
 
     function setPage(carsVal, currentPageVal, filteredCarsVal = undefined, currentCarsVal = undefined) {
