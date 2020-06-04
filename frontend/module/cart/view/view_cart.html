@@ -4,8 +4,15 @@
         <h3 ng-show = "!showCart">It seems your cart is empty :(</h3>
         <div ng-show = "showCart" id = "container-disc-code" style = "float: right;">
             <p>Discount Code</p>
-            <input type = "text" style = "display: block" id = "code-disc-input"/>
-            <a class = "default-button" id = "code-disc-btn">Apply</a>
+            <input ng-model = "discCode" type = "text" style = "display: block" id = "code-disc-input"/>
+            <a ng-click = "addDiscCode()" class = "default-button" id = "code-disc-btn">Apply</a>
+            <div ng-show = "appliedDisc != null">
+                <div style = "margin-top: 15px">
+                    <span>{{appliedDisc}}</span>
+                    <span style = "float: right">{{discPercent}}%</span>
+                </div>
+                <a ng-click = "removeDiscCode()" class = "default-button">Remove Code</a>
+            </div>
         </div>
         <div ng-repeat = "data in dataCart" id = "{{data.carPlate}}" class = "product-element" style = "margin-top: 25px; width: 75%">
             <span id = "info-cont">{{data.brand}} {{data.model}}</span>
@@ -22,6 +29,7 @@
     <div id = "container-price-cart" ng-show = "showCart">
         <div id = "header-price-cart">
             <h3>Total Price</h3>
+            <span>{{getTotal()}}€</span>
         </div>
         <div id = "price-cart-calc"></div>
         <input type = "button" ng-click = "checkOut()" ng-show = "showCart" id = "checkout-btn" class = "default-button" value = "Check Out"/>

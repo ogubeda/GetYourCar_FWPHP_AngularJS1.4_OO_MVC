@@ -80,4 +80,8 @@ class cart_dao {
     function removeDiscCode($username) {
         return db::query() -> update(['code_name' => 'NULL'], 'carts') -> where(['username' => [$username]]) -> execute() -> toJSON() -> getResolve();
     }// end_removeDiscCode
+
+    function selectDiscCode($discCode) {
+        return db::query() -> select(['*'], 'discounts') -> where(['code_name' => [$discCode]]) -> execute() -> queryToArray() -> toJSON() -> getResolve();
+    }// end_selectDiscCode
 }// end_cart_dao

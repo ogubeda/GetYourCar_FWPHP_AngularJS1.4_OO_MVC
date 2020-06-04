@@ -43,7 +43,10 @@ class cart_bll {
     }// end_setDays_cart_BLL
 
     public function setDiscount_cart_BLL($args) {
-        return $this -> dao -> addDiscCode(json_decode(jwt_process::decode($args[0], $args[1]), true)['name'], $args[2]);
+        if ($this -> dao -> addDiscCode(json_decode(jwt_process::decode($args[0], $args[1]), true)['name'], $args[2]) == true) {
+            return $this -> dao -> selectDiscCode($args[2]);
+        }// end_if
+        return 'false';
     }// end_setDiscount_cart_BLL
 
     public function removeDiscount_cart_BLL($args) {
