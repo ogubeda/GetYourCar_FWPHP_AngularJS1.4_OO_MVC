@@ -7,20 +7,22 @@ getyourcar.factory('services_logIn', ['$rootScope', 'services', 'services_localS
             services.post('login', 'returnSession', {jwt: localStorage.token, secureSession: localStorage.secureSession})
             .then(function(response) {
                 if (response.secureSession) {
-                    $rootScope.showLogIn = false;
                     $rootScope.showProfile = true;
+                    $rootScope.showLogIn = false;
                     $rootScope.profileName = response.username;
+                    $rootScope.profileImg = response.avatar;
 
                     services_localStorage.setSession(response.secureSession, response.jwt);
 
                     if (response.type === "client") {
-                        $rootScope.showCRUD = false;
+                        $rootScope.panelAdmin = false;
                     }// end_if
                     if (response.type === "admin") {
-                        $rootScope.showCRUD = true;
+                        $rootScope.panelAdmin = true;
                     }// end_if
                 }// end_if
                 return;
+                
             }, function(error) {
                 console.log(error);
             });// end_services

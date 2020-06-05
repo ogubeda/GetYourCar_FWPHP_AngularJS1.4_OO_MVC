@@ -78,13 +78,17 @@ getyourcar.config(['$routeProvider', '$locationProvider',
                         }// end_checkToken
                     }// end_resolve
                 }).when("/profile", {
-                    templateUrl: "frontend/modules/login/view/profile.view.html",
-                    controller: "profileCtrl",
+                    templateUrl: "frontend/module/profile/view/view_profile.html",
+                    controller: "controller_profile",
                     resolve: {
-                        infoUser: function (services,localstorageService) {
-                            return services.get('login', 'print_user',localstorageService.getUsers());
-                        }
-                    }
+                        userData: function (services) {
+                            return services.post('profile', 'sendData', {JWT: localStorage.token});
+                        }, userPurchases: function(services) {
+                            return services.post('profile', 'showPurchases', {JWT: localStorage.token});
+                        }, userFavs: function(services) {
+                            return services.post('profile', 'sendUserFavs', {JWT: localStorage.token});
+                        }// end_userFavs
+                    }// end_resolve
                 }).when("/cart", {
                     templateUrl: "frontend/module/cart/view/view_cart.html",
                     controller: "controller_cart",
