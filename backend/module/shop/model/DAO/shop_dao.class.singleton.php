@@ -44,7 +44,7 @@ class shop_dao {
     }// end_deleteFav
 
     public function selectFavs($username) {
-        return db::query() -> select(['*'], 'userFav') -> where(['username' => [$username]]) -> execute() -> queryToArray(true) -> toJSON() -> getResolve();
+        return db::query() -> select(['carPlate'], 'userFav') -> where(['username' => [$username]]) -> execute() -> queryToArray(true) -> toJSON() -> getResolve();
     }// end_selectFavs
 
 }// end_QuerysShop

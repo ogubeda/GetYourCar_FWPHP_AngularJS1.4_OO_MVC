@@ -4,8 +4,6 @@ getyourcar.controller('controller_profile', function($scope, userData, userPurch
     $scope.showUserFavs = false;
     $scope.showUserPurchases = false;
 
-    console.log(userData);
-
     if (Array.isArray(userPurchases)) {
         $scope.userPurchases = userPurchases;
     }// end_if

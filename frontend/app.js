@@ -26,7 +26,13 @@ getyourcar.config(['$routeProvider', '$locationProvider',
                         },
                         cars: function (services) {
                             return services.get('shop', 'sendInfo');
-                        }// end_resolve
+                        },
+                        favs: function(services) {
+                            return services.post('shop', 'sendFavs', {JWT: localStorage.token});
+                        },
+                        cart: function(services) {
+                            return services.post('cart', 'selectCart', {JWT: localStorage.token});
+                        }
                     }
                 }).when('/shop/:carPlate' , {
                     templateUrl: "frontend/module/shop/view/view_shopDetails.html",
@@ -34,6 +40,12 @@ getyourcar.config(['$routeProvider', '$locationProvider',
                     resolve: {
                         car: function(services, $route) {
                             return services.post('shop', 'read', {'carPlate': $route.current.params.carPlate})
+                        },
+                        favs: function(services) {
+                            return services.post('shop', 'sendFavs', {JWT: localStorage.token});
+                        },
+                        cart: function(services) {
+                            return services.post('cart', 'selectCart', {JWT: localStorage.token});
                         }
                     }// end_resolve
                 }).when("/login", {

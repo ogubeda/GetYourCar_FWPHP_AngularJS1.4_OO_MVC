@@ -1,4 +1,4 @@
-getyourcar.controller('controller_shop', function($scope, services, filters, cars) {
+getyourcar.controller('controller_shop', function($scope, services, filters, cars, favs, cart) {
     let filteredCars = [];
     let currentCars = [];
 
@@ -7,6 +7,15 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
     $scope.totalItems = cars.length;
     $scope.currentPage = 1;
     $scope.currentFilters = {};
+    $scope.favs = [];
+    $scope.cart = [];
+
+    for (row in cart) {
+        $scope.cart.push(cart[row].carPlate);
+    }// end_for
+    for (row in favs) {
+        $scope.favs.push(favs[row].carPlate);
+    }// end_for
 
     $scope.showDetails = function(carPlate) {
         location.href = "#/shop/" + carPlate;
@@ -78,11 +87,17 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
     $scope.detectFav = function(carPlate) {
         services.post('shop', 'updateFavs', {JWT: localStorage.token, carPlate: carPlate})
         .then(function(response) {
-            if (response === "no-login") {
-                localStorage.jumpPage = "shop";
-                location.href = "#/login";
-            }// end_if
-
+            switch (response) {
+                case 'true':
+                    $scope.favs.push(carPlate);
+                    break;
+                case '1':
+                    $scope.favs.splice($scope.favs.indexOf(carPlate), 1);
+                    break;
+                default:
+                    localStorage.jumpPage = "shop";
+                    location.href = "#/login";
+            }// end_switch
         }, function(error) {
             console.log(error);
         });
@@ -91,8 +106,10 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
     $scope.addToCart = function(carPlate) {
         services.put('cart', 'storeCart', {carPlate: carPlate, days: 1, JWT: localStorage.token})
         .then(function(response) {
-            console.log(response);
-            
+            if (response === 'true') {
+                $scope.cart.push(carPlate);
+            }// end_if
+
         }, function(error) {
             console.log(error);
         });

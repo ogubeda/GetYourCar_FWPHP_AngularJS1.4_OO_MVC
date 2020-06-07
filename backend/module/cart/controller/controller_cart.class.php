@@ -50,7 +50,7 @@ class controller_cart {
         if ((!empty($_POST['JWT'])) && (isset($_SESSION['JWT_Secret']))) {
             echo common::accessModel('cart_model', 'getDataPrint_cart', [$_POST['JWT'], $_SESSION['JWT_Secret']]);
         }else {
-            echo json_encode('false');
+            echo 'no-login';
         }// end _false
     }// end_selectCart
 

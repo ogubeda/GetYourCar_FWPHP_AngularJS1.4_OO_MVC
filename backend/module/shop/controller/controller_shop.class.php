@@ -24,7 +24,7 @@ class controller_shop {
     }// end_viewUp
 
     function sendFavs() {
-        echo common::accessModel('shop_model', 'getUserFavs_shop', [$_POST['jwt'], $_SESSION['JWT_Secret']]);
+        echo common::accessModel('shop_model', 'getUserFavs_shop', [$_POST['JWT'], $_SESSION['JWT_Secret']]);
     }// end_sendFavs
 
     function updateFavs() {
