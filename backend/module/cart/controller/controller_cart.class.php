@@ -69,4 +69,8 @@ class controller_cart {
             echo 'no-login';
         }// end_else
     }// end_removeDiscCode
+
+    function selectCartDetails() {
+        echo common::accessModel('cart_model', 'getUserCartDetails_cart', [$_POST['JWT'], $_SESSION['JWT_Secret'], $_POST['carPlate']]);
+    }// end_selectCartDetails
 }// end_controller_cart

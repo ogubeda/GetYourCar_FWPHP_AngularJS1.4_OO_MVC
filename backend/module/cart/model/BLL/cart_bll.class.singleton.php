@@ -76,4 +76,8 @@ class cart_bll {
         
         return 'false';
     }// end_checkOut_cart_BLL
+
+    public function getUserCartDetails_cart_BLL($args) {
+        return $this -> dao -> selectUserCartDetails(json_decode(jwt_process::decode($args[0], $args[1]), true)['name'], $args[2]);
+    }// end_selectCartDetails
 }// end_cart_bll

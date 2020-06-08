@@ -59,4 +59,8 @@ class shop_bll {
         }// end_if
         return $this -> dao -> insertFav($args[2], $user);
     }//
+
+    public function getUserFavDetails_shop_BLL($args) {
+        return $this -> dao -> selectFavDetails(json_decode(jwt_process::decode($args[0], $args[1]), true)['name'], $args[2]);
+    }// end_getUserFavDetails_shop_BLL
 }// end_shop_bll

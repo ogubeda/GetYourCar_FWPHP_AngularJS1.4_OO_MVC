@@ -10,6 +10,8 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
     $scope.favs = [];
     $scope.cart = [];
 
+    console.log(favs);
+
     for (row in cart) {
         $scope.cart.push(cart[row].carPlate);
     }// end_for
@@ -98,6 +100,7 @@ getyourcar.controller('controller_shop', function($scope, services, filters, car
                     localStorage.jumpPage = "shop";
                     location.href = "#/login";
             }// end_switch
+
         }, function(error) {
             console.log(error);
         });

@@ -41,11 +41,11 @@ getyourcar.config(['$routeProvider', '$locationProvider',
                         car: function(services, $route) {
                             return services.post('shop', 'read', {'carPlate': $route.current.params.carPlate})
                         },
-                        favs: function(services) {
-                            return services.post('shop', 'sendFavs', {JWT: localStorage.token});
+                        favs: function(services, $route) {
+                            return services.post('shop', 'sendFavsDetails', {JWT: localStorage.token, carPlate: $route.current.params.carPlate});
                         },
-                        cart: function(services) {
-                            return services.post('cart', 'selectCart', {JWT: localStorage.token});
+                        cart: function(services, $route) {
+                            return services.post('cart', 'selectCartDetails', {JWT: localStorage.token, carPlate: $route.current.params.carPlate});
                         }
                     }// end_resolve
                 }).when("/login", {

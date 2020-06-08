@@ -208,8 +208,6 @@ class querys {
         return $this;
     }// end_toJSON
 
-    
-
     public function getResolve() {
         return $this -> resolve;
     }//end_getResolve

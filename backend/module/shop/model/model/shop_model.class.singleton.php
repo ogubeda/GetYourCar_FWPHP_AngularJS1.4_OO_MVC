@@ -42,4 +42,8 @@ class shop_model {
     public function setUserFav_shop($args) {
         return $this -> bll -> setUserFav_shop_BLL($args);
     }// end_setUserFav_shop
+
+    public function getUserFavDetails_shop($args) {
+        return $this -> bll -> getUserFavDetails_shop_BLL($args);
+    }// end_getUserFavDetails_shop
 }// end_shop_model

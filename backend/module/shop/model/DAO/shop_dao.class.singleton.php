@@ -47,4 +47,8 @@ class shop_dao {
         return db::query() -> select(['carPlate'], 'userFav') -> where(['username' => [$username]]) -> execute() -> queryToArray(true) -> toJSON() -> getResolve();
     }// end_selectFavs
 
+    public function selectFavDetails($username, $carPlate) {
+        return db::query() -> select(['carPlate'], 'userFav') -> where(['username' => [$username], 'carPlate' => [$carPlate]]) -> execute() -> count() -> toJSON() -> getResolve();
+    }// end_selectFavDetails
+
 }// end_QuerysShop

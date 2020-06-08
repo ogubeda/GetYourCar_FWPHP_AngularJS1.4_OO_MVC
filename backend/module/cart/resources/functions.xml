@@ -36,4 +36,8 @@
         <name>removeDiscCode</name>
         <uri>removeDiscCode</uri>
     </function>
+    <function>
+        <name>selectCartDetails</name>
+        <uri>selectCartDetails</uri>
+    </function>
 </functions>

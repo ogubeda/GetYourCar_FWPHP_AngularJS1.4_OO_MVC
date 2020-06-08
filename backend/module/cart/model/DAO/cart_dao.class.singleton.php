@@ -84,4 +84,8 @@ class cart_dao {
     function selectDiscCode($discCode) {
         return db::query() -> select(['*'], 'discounts') -> where(['code_name' => [$discCode]]) -> execute() -> queryToArray() -> toJSON() -> getResolve();
     }// end_selectDiscCode
+
+    function selectUserCartDetails($username, $carPlate) {
+        return db:: query() -> select(['carPlate'], 'carts') -> where(['username' => [$username], 'carPlate' => [$carPlate]]) -> execute() -> count() -> toJSON() -> getResolve();
+    }// end_selectUserCartDetails
 }// end_cart_dao

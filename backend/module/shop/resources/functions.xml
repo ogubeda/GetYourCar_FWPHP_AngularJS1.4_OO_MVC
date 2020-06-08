@@ -13,6 +13,10 @@
         <uri>sendFilters</uri>
     </function>
     <function>
+        <name>sendFavsDetails</name>
+        <uri>sendFavsDetails</uri>
+    </function>
+    <function>
         <name>filter</name>
         <uri>filter</uri>
     </function>

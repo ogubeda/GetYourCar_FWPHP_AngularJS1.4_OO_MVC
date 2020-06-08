@@ -1,4 +1,4 @@
-getyourcar.controller('controller_logIn', function($scope, $rootScope,services_logIn, services_localStorage, services, services_logInSocial, services_Google, services_GitHub, toastr) {
+getyourcar.controller('controller_logIn', function($scope, $rootScope, services_logIn, services, services_logInSocial, services_Google, services_GitHub, toastr) {
     $scope.regUsername = /^[A-Za-z0-9._-]{5,15}$/;
     $scope.regPassword = /^[A-Za-z0-9._-]{5,20}$/;
     

@@ -50,4 +50,8 @@ class cart_model {
     public function checkOut_cart($args) {
         return $this -> bll -> checkOut_cart_BLL($args);
     }// end_checkOut_cart
+
+    public function getUserCartDetails_cart($args) {
+        return $this -> bll -> getUserCartDetails_cart_BLL($args);
+    }// end_getUserCartDetails_cart
 }// end_cart_model
