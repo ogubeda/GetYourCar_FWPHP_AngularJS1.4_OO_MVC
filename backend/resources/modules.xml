@@ -26,8 +26,8 @@
         <uri>cart</uri>
     </module>
     <module>
-        <name>our-cars</name>
-        <uri>our-cars</uri>
+        <name>crud</name>
+        <uri>crud</uri>
     </module>
     <module>
         <name>our-brands</name>

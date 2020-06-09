@@ -109,6 +109,14 @@ getyourcar.config(['$routeProvider', '$locationProvider',
                             return services.post('cart', 'loadDataCart', {JWT: localStorage.token});
                         }
                     }
+                }).when("/admin", {
+                    templateUrl: "frontend/module/crud/view/view_crud.html",
+                    controller: "controller_crud",
+                    resolve: {
+                        dataCrud: function(services) {
+                            return services.post('crud', 'listCars');
+                        }
+                    }
                 }).otherwise("/home", {
                     templateUrl: "frontend/module/home/view/view_home.html", 
                     controller: "controller_home"

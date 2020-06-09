@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>listCars</name>
+        <uri>listCars</uri>
+    </function>
+    <function>
+        <name>createCar</name>
+        <uri>createCar</uri>
+    </function>
+    <function>
+        <name>readCar</name>
+        <uri>readCar</uri>
+    </function>
+    <function>
+        <name>deleteCar</name>
+        <uri>deleteCar</uri>
+    </function>
+    <function>
+        <name>deleteAllCars</name>
+        <uri>deleteAllCars</uri>
+    </function>
+    <function>
+        <name>updateCar</name>
+        <uri>updateCar</uri>
+    </function>
+</functions>

@@ -1,4 +1,4 @@
-getyourcar.controller('controller_profile', function($scope, userData, userPurchases, userFavs) {
+getyourcar.controller('controller_profile', function($scope, userData, userPurchases, userFavs, services, services_logIn) {
     $scope.userData = userData;
     $scope.showUserData = true;
     $scope.showUserFavs = false;
@@ -28,4 +28,16 @@ getyourcar.controller('controller_profile', function($scope, userData, userPurch
         $scope.showUserFavs = false;
         $scope.showUserPurchases = true;
     };// end_giveUserPurchases
+
+    $scope.deleteAccount = function() {
+        services.put('profile', 'deleteProfile', {JWT: localStorage.token})
+        .then(function(response) {
+            if (response === 'true') {
+                services_logIn.logOut();
+            }// end_if
+            
+        }, function(error) {
+            console.log(error);
+        });
+    };// end_deleteAccount
 });
