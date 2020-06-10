@@ -4,7 +4,7 @@
             <img src="{{userData.avatar}}" />
         </div>
         <div id="container-options">
-            <a id="show-purchases" class="neumorph-child">Purchases</a>
+            <a id="show-purchases" ng-click = "giveUserPurchases()" class="neumorph-child">Purchases</a>
             <a id="show-favs" ng-click = "giveUserFavs()" class="neumorph-child" style="margin-top: 20px;">Favorite Products</a>
         </div>
     </div>
@@ -39,12 +39,16 @@
                 </div>
                 <h2 style = "flex: 50%">Favorites</h2>
             </div>
-            <div id = "data-favs">
+            <div id = "data-favs" ng-show = "showUserFavs">
                 <div ng-repeat = "data in userFavs" class = "fav-cars" style = "display: block">
-                    <img src = "frontend/view/img/allCarsImg/{{data.image}}" style = "max-width: 35%; max-height: 35%">
-                    <div style = "font-weight: bold; font-size: 18px">{{data.brand}} {{data.model}} {{data.carPlate}}</div>
+                    <product-article image = "{{data.image}}" brand = "{{data.brand}}" model = "{{data.model}}" carplate = "{{data.carPlate}}"></product-article>
                 </div>
             </div>
+             <div id = "data-favs" ng-show = "showUserPurchases">
+                <div ng-repeat = "data in userPurchases" class = "purchase-cars" style = "display: block">
+                    <product-article image = "{{data.image}}" brand = "{{data.brand}}" model = "{{data.model}}" carplate = "{{data.carPlate}}"></product-article>
+                </div>
+             </div>
         </div>
     </div>
 </div>
