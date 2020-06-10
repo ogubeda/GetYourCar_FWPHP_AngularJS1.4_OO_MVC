@@ -2,12 +2,14 @@ getyourcar.controller('controller_cart', function($scope, services, toastr, data
     $scope.dataCart = "";
     $scope.showCart = false;
     $scope.qtyDays = {};
-    $scope.appliedDisc = dataCart[0].code_name;
-    $scope.discPercent = dataCart[0].discount;
+    $scope.appliedDisc = "";
+    $scope.discPercent = "";
 
     if (Array.isArray(dataCart)) {
         $scope.dataCart = dataCart;
         $scope.showCart = true;
+        $scope.appliedDisc = dataCart[0].code_name;
+        $scope.discPercent = dataCart[0].discount;
     }// end_if
 
     $scope.maxDays = function(num) {

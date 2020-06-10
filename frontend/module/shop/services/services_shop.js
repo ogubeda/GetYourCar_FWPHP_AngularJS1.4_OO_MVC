@@ -5,10 +5,11 @@ getyourcar.factory('services_shop', function() {
     function setArray(obj) {
         let arr = [];
 
-        for (row in obj) {
-            arr.push(obj[row].carPlate);
-        }// end_for
-
+        if (Array.isArray(obj)) {
+            for (row in obj) {
+                arr.push(obj[row].carPlate);
+            }// end_for
+        }// end_if
         return arr;
     }// end_setArray
     

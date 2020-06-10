@@ -37,7 +37,8 @@
                         </path>
                     </svg>
                 </div>
-                <h2 style = "flex: 50%">Favorites</h2>
+                <h2 ng-show = "showUserFavs" style = "flex: 50%">Favorites</h2>
+                <h2 ng-show = "showUserPurchases" style = "flex: 50%">Purchases</h2>
             </div>
             <div id = "data-favs" ng-show = "showUserFavs">
                 <div ng-repeat = "data in userFavs" class = "fav-cars" style = "display: block">
