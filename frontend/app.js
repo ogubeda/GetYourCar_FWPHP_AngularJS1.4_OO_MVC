@@ -117,6 +117,9 @@ getyourcar.config(['$routeProvider', '$locationProvider',
                             return services.post('crud', 'listCars');
                         }
                     }
+                }).when("/admin/addCar", {
+                    templateUrl: "frontend/module/crud/view/view_crud_addCar.html",
+                    controller: "controller_crud_addCar"
                 }).otherwise("/home", {
                     templateUrl: "frontend/module/home/view/view_home.html", 
                     controller: "controller_home"

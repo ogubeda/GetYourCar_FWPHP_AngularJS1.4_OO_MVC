@@ -30,4 +30,12 @@ class profile_bll {
     public function getUserPurchases_profile_BLL($args) {
         return $this -> dao -> selectPurchases(json_decode(jwt_process::decode($args[0], $args[1]), true)['name']);
     }// end_getUserPurchases_profile_BLL
+
+    public function setUserData_profile_BLL($args) {
+        $token = json_decode(jwt_process::decode($args[0], $args[1]), true);
+        if ($token['type'] == 'manual') {
+            return $this -> dao -> updateUserData($token['name'], $args[2]['username'], $args[2]['email']);
+        }// end_if
+        return 'false';
+    }// end_setUserData_profile_BLL
 }// end_profile_bll

@@ -11,19 +11,24 @@
     <div id="profile-right">
         <div id="userData" ng-show = "showUserData">
             <div id="container-username" class="neumorph-child">
-                <a>Username</a>
-                <span>{{userData.username}}</span>
+                <span style = "color: #fc7820; display: block">Username</span>
+                <span ng-show = "!showInputData">{{userData.username}}</span>
+                <input class = "default-input" ng-pattern = "regUsername" ng-show = "showInputData" ng-model = "updateUsername" name = "updateUsername">
             </div>
             <div id="container-username" class="neumorph-child" style="margin-top: 20px;">
-                <a>Email</a>
-                <span>{{userData.email}}</span>
+                <span style = "color: #fc7820; display: block">Email</span>
+                <span ng-show = "!showInputData">{{userData.email}}</span>
+                <input class = "default-input" ng-show = "showInputData" ng-model = "updateEmail">
             </div>
             <div id="container-username" class="neumorph-child" style="margin-top: 20px;">
-                <a>Register Date</a>
+                <span style = "color: #fc7820; display: block">Register Date</span>
                 <span>{{userData.registerDate}}</span>
             </div>
             <div id="modify-profile">
-                <a class="neumorph-btn" ng-click = "deleteAccount()" style="margin-top: 100px">Delete Account</a>
+                <a class="default-button" ng-click = "deleteAccount()" style="margin-top: 100px">Delete Account</a>
+                <a class="default-button" ng-click = "modifyAccount()" ng-show = "!hideModifyBtn" style="margin-top: 100px">Modify</a>
+                <a class="default-button" ng-click = "updateAccount()" ng-disabled = "updateUsername.$invalid" ng-show = "showInputData" style="margin-top: 100px">Update</a>
+                <a class="default-button" ng-click = "backToStart()" ng-show = "showInputData" style="margin-top: 100px">Back</a>
             </div>
         </div>
         <div id="container-userActions" ng-show = "!showUserData">

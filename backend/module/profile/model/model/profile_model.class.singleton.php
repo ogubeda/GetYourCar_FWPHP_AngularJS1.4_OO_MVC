@@ -30,4 +30,8 @@ class profile_model {
     public function getUserPurchases_profile($args) {
         return $this -> bll -> getUserPurchases_profile_BLL($args);
     }// end_getUserPurchases_profile
+
+    public function setUserData_profile($args) {
+        return $this -> bll -> setUserData_profile_BLL($args);
+    }// end_setUserData_profile
 }// end_profile_model

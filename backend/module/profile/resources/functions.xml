@@ -16,4 +16,8 @@
         <name>showPurchases</name>
         <uri>showPurchases</uri>
     </function>
+    <function>
+        <name>updateUserData</name>
+        <uri>updateUserData</uri>
+    </function>
 </functions>

@@ -17,4 +17,8 @@ class controller_profile {
     function showPurchases() {
         echo common::accessModel('profile_model', 'getUserPurchases_profile', [$_POST['JWT'], $_SESSION['JWT_Secret']]);
     }// end_showPurchases
+
+    function updateUserData() {
+        echo common::accessModel('profile_model', 'setUserData_profile', [$_POST['JWT'], $_SESSION['JWT_Secret'], $_POST['user']]);
+    }// end_updateUserData
 }// end_controller_profile

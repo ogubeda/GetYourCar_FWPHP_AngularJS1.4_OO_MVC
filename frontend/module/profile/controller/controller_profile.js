@@ -3,6 +3,7 @@ getyourcar.controller('controller_profile', function($scope, userData, userPurch
     $scope.showUserData = true;
     $scope.showUserFavs = false;
     $scope.showUserPurchases = false;
+    $scope.regUsername = /^[A-Za-z0-9._-]{5,15}$/;
 
     if (Array.isArray(userPurchases)) {
         $scope.userPurchases = userPurchases;
@@ -15,6 +16,8 @@ getyourcar.controller('controller_profile', function($scope, userData, userPurch
         $scope.showUserData = true;
         $scope.showUserFavs = false;
         $scope.showUserPurchases = false;
+        $scope.hideModifyBtn = false;
+        $scope.showInputData = false;
     };// end_backToStart
 
     $scope.giveUserFavs = function() {
@@ -40,4 +43,26 @@ getyourcar.controller('controller_profile', function($scope, userData, userPurch
             console.log(error);
         });
     };// end_deleteAccount
+
+    $scope.modifyAccount = function() {
+        $scope.hideModifyBtn = true;
+        $scope.showInputData = true;
+        $scope.updateUsername = userData.username;
+        $scope.updateEmail = userData.email;
+    };// end_modifyAccount
+
+    $scope.updateAccount = function() {
+        let user = {username: $scope.updateUsername, email: $scope.updateEmail};
+
+        services.put('profile', 'updateUserData', {JWT: localStorage.token, user: user})
+        .then(function(response) {
+            console.log(response);
+            if (response === 'true') {
+                services_logIn.printMenu(); 
+                location.href = "#/home";
+            }// end_if
+        }, function(error) {
+            console.log(error);
+        });
+    };// end_updateAccount
 });

@@ -3,8 +3,8 @@
 class jwt_process {
     private static $header = '{"typ": "JWT", "alg": "HS256"}';
     //////
-    public static function encode($secret, $user) {
-        $payload = json_encode(['iat' => time(), 'exp' => time() + (60 * 60), 'name' => $user]);
+    public static function encode($secret, $user, $type) {
+        $payload = json_encode(['iat' => time(), 'exp' => time() + (60 * 60), 'name' => $user, 'type' => $type]);
         $JWT = new jwt();
         return $JWT -> encode(self::$header, $payload, $secret);
     }// end_encode

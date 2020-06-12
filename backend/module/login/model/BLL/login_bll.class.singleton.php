@@ -28,21 +28,21 @@ class login_bll {
     public function accessUser_login_BLL($args) {
         $user = $this -> dao -> selectUserData($args[0]);
         if (password_verify($args[1], $user['password'])) {
-            return self::generateSessionJWT(common::generate_Token_secure(20), $user['id_user']);
+            return self::generateSessionJWT(common::generate_Token_secure(20), $user['id_user'], 'manual');
         }// end_if
         return 'Fail';
     }// end_if
 
     public function accessUserSocial_login_BLL($args) {
         $result = true;
-        if ($args['email']) {
-            $args['email'] = 'NULL';
+        if (!$args['email']) {
+            $args['email'] = '';
         }// end_if
         if (empty($this -> dao -> checkUserSocial($args['sub']))) {
             $result = $this -> dao -> insertClientUser($args['sub'], $args['nickname'], $args['email'],'NULL', $args['picture'], 'NULL', 1);
         }// end_if
         if ($result) {
-            return self::generateSessionJWT(common::generate_Token_secure(20), $this -> dao -> selectUserData($args['sub'])['id_user']);
+            return self::generateSessionJWT(common::generate_Token_secure(20), $this -> dao -> selectUserData($args['sub'])['id_user'], 'social');
         }// end_if
         return 'Empty';
     }// end_acessUserSocial_login_BLL
@@ -79,15 +79,16 @@ class login_bll {
     public function getUserData_login_BLL($args) {
         $secure = common::generate_Token_secure(20);
         $userName = json_decode(jwt_process::decode($args[0], $args[1]), true)['name'];
+        $type = json_decode(jwt_process::decode($args[0], $args[1]), true)['type'];
         $user = $this -> dao -> selectUserMenuData($userName);
         loadSession($secure);
         $user['secureSession'] = md5(session_id());
-        $user['jwt'] = jwt_process::encode($secure, $userName);
+        $user['jwt'] = jwt_process::encode($secure, $userName, $type);
         return json_encode($user);
     }// end_getUserData_login_BLL
 
-    private static function generateSessionJWT($secret, $user) {
-        $jwt = jwt_process::encode($secret, $user);
+    private static function generateSessionJWT($secret, $user, $type) {
+        $jwt = jwt_process::encode($secret, $user, $type);
         loadSession($secret);
         return json_encode(array('secureSession' => md5(session_id()), 'jwt' => $jwt));
     }// end_regenerateToken

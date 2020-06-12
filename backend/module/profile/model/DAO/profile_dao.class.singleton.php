@@ -37,4 +37,8 @@ class profile_dao {
                             -> where(['username' => [$username]]) 
                             -> execute() -> queryToArray(true) -> toJSON() -> getResolve(); 
     }// end_selectPurchases
+
+    function updateUserData($user, $username, $email) {
+        return db::query() -> update(['username' => $username, 'email' => $email], 'users', true) -> where(['id_user' => [$user]]) -> execute() -> toJSON() -> getResolve();
+    }// end_updateUserData
 }// end_profile_dao
