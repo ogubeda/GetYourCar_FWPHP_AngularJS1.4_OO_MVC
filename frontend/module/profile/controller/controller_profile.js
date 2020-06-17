@@ -1,4 +1,4 @@
-getyourcar.controller('controller_profile', function($scope, userData, userPurchases, userFavs, services, services_logIn) {
+getyourcar.controller('controller_profile', function($scope, userData, userPurchases, userFavs, services, services_logIn, toastr) {
     $scope.userData = userData;
     $scope.showUserData = true;
     $scope.showUserFavs = false;
@@ -18,6 +18,7 @@ getyourcar.controller('controller_profile', function($scope, userData, userPurch
         $scope.showUserPurchases = false;
         $scope.hideModifyBtn = false;
         $scope.showInputData = false;
+        $scope.showChangePassCont = false;
     };// end_backToStart
 
     $scope.giveUserFavs = function() {
@@ -61,8 +62,27 @@ getyourcar.controller('controller_profile', function($scope, userData, userPurch
                 services_logIn.printMenu(); 
                 location.href = "#/home";
             }// end_if
+            
         }, function(error) {
             console.log(error);
         });
     };// end_updateAccount
+
+    $scope.showPassChange = function() {
+        $scope.showChangePassCont = true;
+    };// end_showPassChange
+
+    $scope.changePassword = function() {
+        services.put('profile', 'changePassword', {JWT: localStorage.token, password: CryptoJS.MD5($scope.newPassword).toString()})
+        .then(function (response) {
+            console.log(response);
+            if (response === 'true') {
+                toastr.success('Password Changed.');
+                location.href = "#/home";
+            }// end_if
+
+        }, function(error) {
+            console.log(error);
+        });
+    }; // end_changePassword
 });

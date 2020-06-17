@@ -21,4 +21,8 @@ class controller_profile {
     function updateUserData() {
         echo common::accessModel('profile_model', 'setUserData_profile', [$_POST['JWT'], $_SESSION['JWT_Secret'], $_POST['user']]);
     }// end_updateUserData
+
+    function changePassword() {
+        echo common::accessModel('profile_model', 'setUserPassword_profile', [$_POST['JWT'], $_SESSION['JWT_Secret'], $_POST['password']]);
+    }// end_changePassword
 }// end_controller_profile

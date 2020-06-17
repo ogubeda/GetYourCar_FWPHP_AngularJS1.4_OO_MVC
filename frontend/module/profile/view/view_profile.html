@@ -24,11 +24,19 @@
                 <span style = "color: #fc7820; display: block">Register Date</span>
                 <span>{{userData.registerDate}}</span>
             </div>
-            <div id="modify-profile">
-                <a class="default-button" ng-click = "deleteAccount()" style="margin-top: 100px">Delete Account</a>
-                <a class="default-button" ng-click = "modifyAccount()" ng-show = "!hideModifyBtn" style="margin-top: 100px">Modify</a>
-                <a class="default-button" ng-click = "updateAccount()" ng-disabled = "updateUsername.$invalid" ng-show = "showInputData" style="margin-top: 100px">Update</a>
-                <a class="default-button" ng-click = "backToStart()" ng-show = "showInputData" style="margin-top: 100px">Back</a>
+            <div id = "container-changePassword" class = "neumorph-child" ng-show = "showChangePassCont" style="margin-top: 20px;">
+                <span style = "color: #fc7820; display: block">New Password</span>
+                <input class = "default-input" ng-model = "newPassword">
+                <span style = "color: #fc7820; display: block">Repeat New Password</span>
+                <input class = "default-input" ng-model = "newRePassword">
+            </div>
+            <div id="modify-profile" style = "margin-top: 55px">
+                <a style = "display: block" class = "default-button" ng-click = "modifyAccount()" ng-show = "!hideModifyBtn" style="margin-top: 100px">Modify</a>
+                <a style = "display: block" class = "default-button" ng-click = "updateAccount()" ng-disabled = "updateUsername.$invalid" ng-show = "showInputData" style="margin-top: 100px">Update</a>
+                <a style = "display: block" class = "default-button" ng-click = "showPassChange()" ng-show = "showInputData && !showChangePassCont" style="margin-top: 100px">Change Password</a>
+                <a style = "display: block" class = "default-button" ng-click = "changePassword()" ng-show = "showChangePassCont" style="margin-top: 100px">Update Password</a>
+                <a style = "display: block" class="default-button" ng-click = "backToStart()" ng-show = "showInputData" style="margin-top: 100px">Back</a>
+                <a class = "default-button" ng-click = "deleteAccount()" style="margin-top: 100px">Delete Account</a>
             </div>
         </div>
         <div id="container-userActions" ng-show = "!showUserData">

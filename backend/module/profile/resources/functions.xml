@@ -20,4 +20,8 @@
         <name>updateUserData</name>
         <uri>updateUserData</uri>
     </function>
+    <funtion>
+        <name>changePassword</name>
+        <uri>changePassword</uri>
+    </funtion>
 </functions>

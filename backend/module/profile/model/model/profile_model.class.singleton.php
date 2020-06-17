@@ -34,4 +34,8 @@ class profile_model {
     public function setUserData_profile($args) {
         return $this -> bll -> setUserData_profile_BLL($args);
     }// end_setUserData_profile
+
+    public function setUserPassword_profile($args) {
+        return $this -> bll -> setUserPassword_profile_BLL($args);
+    }// end_setUserPassword_profile
 }// end_profile_model

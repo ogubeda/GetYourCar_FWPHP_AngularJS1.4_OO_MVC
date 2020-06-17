@@ -41,4 +41,8 @@ class profile_dao {
     function updateUserData($user, $username, $email) {
         return db::query() -> update(['username' => $username, 'email' => $email], 'users', true) -> where(['id_user' => [$user]]) -> execute() -> toJSON() -> getResolve();
     }// end_updateUserData
+
+    function updateUserPassword($password, $user) {
+        return db::query() -> update(['password' => $password], 'users', true) -> where(['id_user' => [$user]]) -> execute() -> toJSON() -> getResolve();
+    }// end_updateUserPassword
 }// end_profile_dao

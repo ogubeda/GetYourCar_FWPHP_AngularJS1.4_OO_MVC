@@ -38,4 +38,8 @@ class profile_bll {
         }// end_if
         return 'false';
     }// end_setUserData_profile_BLL
+
+    public function setUserPassword_profile_BLL($args) {
+        return $this -> dao -> updateUserPassword(password_hash($args[2], PASSWORD_DEFAULT), json_decode(jwt_process::decode($args[0], $args[1]), true)['name']);
+    }// end_setUserPassword_profile_BLL
 }// end_profile_bll
