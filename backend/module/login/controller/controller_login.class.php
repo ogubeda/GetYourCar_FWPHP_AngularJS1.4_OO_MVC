@@ -33,9 +33,9 @@ class controller_login {
     function reload() {
         updateSession(true);
         $secret = common::generate_Token_secure(20);
-        $name = json_decode(jwt_process::decode($_POST['JWT'], $_SESSION['JWT_Secret']), true)['name'];
+        $token = json_decode(jwt_process::decode($_POST['JWT'], $_SESSION['JWT_Secret']), true)['name'];
         $_SESSION['JWT_Secret'] = $secret;
-        echo json_encode(array('secureSession' => md5(session_id()), 'token' => jwt_process::encode($secret, $name)));
+        echo json_encode(array('secureSession' => md5(session_id()), 'token' => jwt_process::encode($secret, $token['name'], $token['type'])));
     }// end_reload
 
     function logOut() {
